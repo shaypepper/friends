@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{page}} user</title>
+</head>
+<body>
+  <h1>{{page}} user</h1>
+  {% if page == 'add': %}
+    <form action="/add" method="post">
+  {% else: %}
+    <form action="/update/{{friend['id']|string}}" method="post">
+  {% endif %}
+    name: <input type="text" name="name" value="{{friend['name']}}"><br>
+    email: <input type="email" name="email" value="{{friend['email']}}">
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
