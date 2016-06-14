@@ -7,8 +7,8 @@ class MySQLConnection(object):
         config = {
                 'host': 'localhost',
                 'database': db, # we got db as an arguement
-                'user': 'root',
-                'password': '',
+                'user': '', # fix with your bd name
+                'password': '', # fix with your password
                 'port': '3306' # change the port to match the port your SQL server is running on
         }
         # this will use the above values to generate the path to connect to your sql database
