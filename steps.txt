@@ -1,0 +1,50 @@
+STEP: index
+  http verb: get
+  route: '/'
+  sql query: SELECT * FROM friends
+  return: render 'index.html' 
+
+STEP: add
+  http verb: get 
+  route: '/add'
+  sql query: ''
+  return: render 'edit.html'
+
+STEP: add
+  http verb: post
+  route: /add
+  sql query: INSERT INTO friends (id, name, email, created_at) VALUES (DEFAULT, :name, :email, NOW())
+  data for query: request.form
+  return: redirect '/'
+
+STEP: show
+  http verb: get
+  route: /show/<friend_id>
+  sql query: SELECT * FROM friends WHERE id = :friend_id
+  data for query: {'friend_id', friend_id}
+  return: render 'displayfriend.html', friend[0]
+
+STEP: update
+  http verb: get 
+  route: /update/<friend_id>
+  sql query: SELECT name, email FROM friends WHERE id = :friend_id
+  data for query: {'friend_id', friend_id}
+  return: render 'edit.html'
+
+STEP: update
+  http verb: post
+  route: /update/<friend_id>
+  sql query: UPDATE friends SET name = :name, email = :email WHERE id = :friend_id
+  data for query: request.form && route
+  return: redirect '/'
+
+STEP delete
+  http verb: post
+  route: /delete/<friend_id>
+  sql query: DELETE from friends WHERE id = :friend_id
+  data for query: {'friend_id', friend_id}
+  return: redirect '/'
+
+
+
+
